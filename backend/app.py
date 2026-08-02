@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify
+
+from flask import Flask, request, jsonify, send_from_directory
 import numpy as np
 from flask_cors import CORS
 import pandas as pd
@@ -9,8 +10,11 @@ import os
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 MODEL_DIR = os.path.join(BASE_DIR, "model")
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 
 model = load_model(os.path.join(MODEL_DIR, "best_model.keras"))
 scaler = joblib.load(os.path.join(MODEL_DIR, "scaler.pkl"))
