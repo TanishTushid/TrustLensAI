@@ -59,9 +59,10 @@ categorical_cols = [
     'private'
 ]
 
-@app.route('/')
+
+@app.route("/")
 def home():
-    return 'welcome to TrustLens'
+    return send_from_directory(FRONTEND_DIR, "index.html")
 
 @app.route('/predict', methods=['POST'])
 def predict():
