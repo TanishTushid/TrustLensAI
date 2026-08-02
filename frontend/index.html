@@ -3,31 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>AI Fake Instagram Account Detection - TrustLens</title>
-  
-  <!-- Icons & Retro Pixel Google Fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Varela+Round&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  >
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Varela+Round&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
     :root {
-      /* Pixel Sunset Vaporwave Palette */
       --sky-purple-dark: #0d0e1b;
       --sky-purple: #231b36;
       --sunset-pink: #cc7897;
       --sunset-peach: #eab4a8;
       --accent-cyan: #38bdf8;
       --accent-teal: #78c6b1;
-      
+
       --card-bg: rgba(17, 24, 39, 0.92);
       --input-bg: #1f293d;
       --text-main: #f8fafc;
       --text-muted: #9ca3af;
       --border-color: #2e3b52;
-      
+
       --fake-color: #ef4444;
       --genuine-color: #10b981;
-      
+
       --font-pixel: 'Press Start 2P', cursive;
       --font-body: 'Varela Round', system-ui, -apple-system, sans-serif;
     }
@@ -40,20 +48,32 @@
     }
 
     body {
-      background: linear-gradient(180deg, var(--sky-purple-dark) 0%, var(--sky-purple) 35%, var(--sunset-pink) 75%, var(--sunset-peach) 100%);
+      background: linear-gradient(
+        180deg,
+        var(--sky-purple-dark) 0%,
+        var(--sky-purple) 35%,
+        var(--sunset-pink) 75%,
+        var(--sunset-peach) 100%
+      );
+
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       padding: 30px 20px;
     }
 
     .view-screen {
       width: 100%;
       max-width: 980px;
-      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+
+      transition:
+        opacity 0.4s ease-in-out,
+        transform 0.4s ease-in-out;
     }
 
     .hidden {
@@ -62,57 +82,88 @@
       transform: scale(0.97);
     }
 
-    /* --- INTRO SCREEN STYLES --- */
+    /* =========================
+       INTRO SCREEN
+    ========================= */
+
     .intro-card {
       background: var(--card-bg);
+
       border: 2px solid var(--border-color);
       border-radius: 16px;
+
       padding: 48px 32px;
+
       text-align: center;
+
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+
       backdrop-filter: blur(10px);
     }
 
     .intro-title {
       font-family: var(--font-pixel);
+
       color: var(--accent-cyan);
+
       font-size: 1.8rem;
+
       margin-bottom: 18px;
+
       text-shadow: 3px 3px 0px var(--sky-purple-dark);
+
       line-height: 1.4;
     }
 
     .intro-subtitle {
       color: var(--sunset-peach);
+
       font-size: 1.1rem;
+
       margin-bottom: 24px;
+
       font-weight: 600;
     }
 
     .pixel-divider {
       font-family: var(--font-pixel);
+
       color: var(--accent-teal);
+
       font-size: 1.2rem;
+
       margin: 20px 0;
     }
 
     .intro-desc {
       font-size: 1rem;
+
       color: var(--text-muted);
+
       line-height: 1.6;
+
       max-width: 650px;
+
       margin: 0 auto 30px auto;
     }
 
     .redirect-box {
       font-family: var(--font-pixel);
+
       font-size: 0.75rem;
+
       background: rgba(0, 0, 0, 0.4);
+
       padding: 14px 20px;
+
       border-radius: 8px;
+
       border: 1px dashed var(--accent-cyan);
+
       display: inline-block;
+
       margin-bottom: 20px;
+
       color: var(--text-main);
     }
 
@@ -122,44 +173,65 @@
 
     .skip-btn {
       background: var(--accent-cyan);
+
       color: var(--sky-purple-dark);
+
       border: none;
+
       padding: 12px 28px;
+
       font-family: var(--font-pixel);
+
       font-size: 0.75rem;
+
       border-radius: 6px;
+
       cursor: pointer;
+
       transition: all 0.2s;
     }
 
     .skip-btn:hover {
       background: var(--accent-teal);
+
       transform: translateY(-2px);
     }
 
-    /* --- PREDICT SCREEN STYLES --- */
+    /* =========================
+       PREDICT SCREEN
+    ========================= */
+
     header {
       text-align: center;
+
       margin-bottom: 28px;
     }
 
     header h1 {
       font-family: var(--font-pixel);
+
       color: var(--accent-cyan);
+
       font-size: 1.6rem;
+
       text-shadow: 2px 2px 0 var(--sky-purple-dark);
+
       margin-bottom: 10px;
     }
 
     header p {
       color: var(--text-muted);
+
       font-size: 0.95rem;
     }
 
     .cards-container {
       display: grid;
+
       grid-template-columns: 1fr 1fr;
+
       gap: 24px;
+
       margin-bottom: 24px;
     }
 
@@ -171,331 +243,959 @@
 
     .card {
       background: var(--card-bg);
+
       border: 1px solid var(--border-color);
+
       border-radius: 12px;
+
       padding: 24px;
+
       backdrop-filter: blur(10px);
+
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     }
 
     .card-header {
       display: flex;
+
       align-items: center;
+
       gap: 10px;
+
       font-size: 1.1rem;
+
       font-weight: 600;
+
       color: var(--accent-cyan);
+
       margin-bottom: 20px;
     }
 
     .form-group {
       display: flex;
+
       flex-direction: column;
+
       margin-bottom: 18px;
     }
 
     .form-group label {
       font-size: 0.88rem;
+
       font-weight: 600;
+
       margin-bottom: 8px;
+
       color: var(--text-main);
     }
 
-    .form-group input, 
+    .form-group input,
     .form-group select {
       background: var(--input-bg);
+
       border: 1px solid var(--border-color);
+
       color: var(--text-main);
+
       padding: 12px 14px;
+
       border-radius: 8px;
+
       font-size: 0.95rem;
+
       outline: none;
+
       transition: all 0.2s ease-in-out;
     }
 
     .form-group select {
       cursor: pointer;
+
       appearance: none;
+
       background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22293%22%20height%3D%22293%22%3E%3Cpath%20fill%3D%22%239CA3AF%22%20d%3D%22M201.5%20109.394L146.5%20164.394l-55-55%2014.142-14.142%2040.858%2040.858%2040.858-40.858z%22%2F%3E%3C%2Fsvg%3E");
+
       background-repeat: no-repeat;
+
       background-position: right 14px top 50%;
+
       background-size: 16px auto;
     }
 
-    .form-group input:focus, 
+    .form-group input:focus,
     .form-group select:focus {
       border-color: var(--accent-cyan);
+
       box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
     }
 
     .help-text {
       font-size: 0.78rem;
+
       color: var(--text-muted);
+
       margin-top: 5px;
     }
 
     .submit-btn {
       width: 100%;
+
       padding: 16px;
+
       background: var(--accent-cyan);
+
       color: var(--sky-purple-dark);
+
       font-weight: 700;
+
       font-size: 1rem;
+
       border: none;
+
       border-radius: 8px;
+
       cursor: pointer;
+
       transition: all 0.2s;
     }
 
     .submit-btn:hover {
       opacity: 0.9;
+
       box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+
+      cursor: not-allowed;
     }
 
     .result-card {
       margin-top: 24px;
+
       padding: 24px;
+
       background: var(--card-bg);
+
       border: 1px solid var(--border-color);
+
       border-radius: 12px;
+
       text-align: center;
+
       display: none;
     }
 
     .prediction-badge {
       font-size: 2.2rem;
+
       font-weight: 800;
+
       margin: 10px 0;
     }
 
-    .prediction-badge.fake { color: var(--fake-color); }
-    .prediction-badge.genuine { color: var(--genuine-color); }
+    .prediction-badge.fake {
+      color: var(--fake-color);
+    }
+
+    .prediction-badge.genuine {
+      color: var(--genuine-color);
+    }
 
     .error-msg {
       margin-top: 16px;
+
       color: var(--fake-color);
+
       font-weight: bold;
+
       text-align: center;
+
       display: none;
+
+      word-break: break-word;
     }
   </style>
 </head>
+
 <body>
 
-  <!-- SCREEN 1: INTRO PAGE -->
+  <!-- =========================
+       INTRO SCREEN
+  ========================= -->
+
   <div id="introScreen" class="view-screen">
+
     <div class="intro-card">
-      <h1 class="intro-title">TrustLens</h1>
-      <div class="intro-subtitle">AI Fake Instagram Account Detection</div>
-      
-      <div class="pixel-divider">✦ ─── ★ ─── ✦</div>
-      
+
+      <h1 class="intro-title">
+        TrustLens
+      </h1>
+
+      <div class="intro-subtitle">
+        AI Fake Instagram Account Detection
+      </div>
+
+      <div class="pixel-divider">
+        ✦ ─── ★ ─── ✦
+      </div>
+
       <p class="intro-desc">
-        Fill all account details below and let our AI model determine whether the Instagram profile is Genuine or Fake.
+        Fill all account details below and let our AI model determine
+        whether the Instagram profile is Genuine or Fake.
       </p>
-      
+
       <div class="redirect-box">
-        Redirecting to detection tool in <span id="countdown">5</span> seconds...
+        Redirecting to detection tool in
+        <span id="countdown">5</span>
+        seconds...
       </div>
-      
+
       <div>
-        <button class="skip-btn" onclick="showPredictScreen()">Proceed Now &rarr;</button>
+        <button
+          class="skip-btn"
+          onclick="showPredictScreen()"
+        >
+          Proceed Now &rarr;
+        </button>
       </div>
+
     </div>
+
   </div>
 
-  <!-- SCREEN 2: PREDICTION FORM PAGE -->
-  <div id="predictScreen" class="view-screen hidden">
+
+  <!-- =========================
+       PREDICTION SCREEN
+  ========================= -->
+
+  <div
+    id="predictScreen"
+    class="view-screen hidden"
+  >
+
     <header>
-      <h1>AI Fake Instagram Account Detection</h1>
-      <p>Fill all account details below and let our AI model determine whether the Instagram profile is Genuine or Fake.</p>
+
+      <h1>
+        AI Fake Instagram Account Detection
+      </h1>
+
+      <p>
+        Fill all account details below and let our AI model determine
+        whether the Instagram profile is Genuine or Fake.
+      </p>
+
     </header>
 
+
     <form id="analyzeForm">
+
       <div class="cards-container">
-        
-        <!-- Left Column: Account Information -->
+
+
+        <!-- =========================
+             ACCOUNT INFORMATION
+        ========================= -->
+
         <div class="card">
+
           <div class="card-header">
-            <i class="fa-solid fa-user"></i> Account Information
+            <i class="fa-solid fa-user"></i>
+            Account Information
           </div>
 
-          <div class="form-group">
-            <label for="username">Instagram Username</label>
-            <input type="text" id="username" placeholder="username" />
-            <span class="help-text">This is only stored in prediction history.</span>
-          </div>
 
           <div class="form-group">
-            <label for="profile_pic">Profile Picture</label>
+
+            <label for="username">
+              Instagram Username
+            </label>
+
+            <input
+              type="text"
+              id="username"
+              placeholder="username"
+            />
+
+            <span class="help-text">
+              This is only stored in prediction history.
+            </span>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="profile_pic">
+              Profile Picture
+            </label>
+
             <select id="profile_pic">
-              <option value="1">Yes</option>
-              <option value="0">No</option>
+
+              <option value="1">
+                Yes
+              </option>
+
+              <option value="0">
+                No
+              </option>
+
             </select>
+
           </div>
 
-          <div class="form-group">
-            <label for="nums_username">Username Randomness</label>
-            <input type="number" step="0.01" id="nums_username" value="0.1" required />
-            <span class="help-text">Higher values indicate more random usernames.</span>
-          </div>
 
           <div class="form-group">
-            <label for="fullname_words">Number of Words in Full Name</label>
-            <input type="number" id="fullname_words" value="2" min="0" required />
+
+            <label for="nums_username">
+              Username Randomness
+            </label>
+
+            <input
+              type="number"
+              step="0.01"
+              id="nums_username"
+              value="0.1"
+              required
+            />
+
+            <span class="help-text">
+              Higher values indicate more random usernames.
+            </span>
+
           </div>
 
+
           <div class="form-group">
-            <label for="nums_fullname">Fullname Randomness</label>
-            <input type="number" step="0.01" id="nums_fullname" value="0" required />
-            <span class="help-text">Higher values indicate random-looking full names.</span>
+
+            <label for="fullname_words">
+              Number of Words in Full Name
+            </label>
+
+            <input
+              type="number"
+              id="fullname_words"
+              value="2"
+              min="0"
+              required
+            />
+
           </div>
+
+
+          <div class="form-group">
+
+            <label for="nums_fullname">
+              Fullname Randomness
+            </label>
+
+            <input
+              type="number"
+              step="0.01"
+              id="nums_fullname"
+              value="0"
+              required
+            />
+
+            <span class="help-text">
+              Higher values indicate random-looking full names.
+            </span>
+
+          </div>
+
         </div>
 
-        <!-- Right Column: Security & Privacy -->
+
+        <!-- =========================
+             SECURITY & PRIVACY
+        ========================= -->
+
         <div class="card">
+
           <div class="card-header">
-            <i class="fa-solid fa-lock"></i> Security & Privacy
+
+            <i class="fa-solid fa-lock"></i>
+
+            Security & Privacy
+
           </div>
 
+
           <div class="form-group">
-            <label for="name_equals_username">Name Equals Username</label>
+
+            <label for="name_equals_username">
+              Name Equals Username
+            </label>
+
             <select id="name_equals_username">
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+
+              <option value="0">
+                No
+              </option>
+
+              <option value="1">
+                Yes
+              </option>
+
             </select>
+
           </div>
 
+
           <div class="form-group">
-            <label for="external_url">External URL</label>
+
+            <label for="external_url">
+              External URL
+            </label>
+
             <select id="external_url">
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+
+              <option value="0">
+                No
+              </option>
+
+              <option value="1">
+                Yes
+              </option>
+
             </select>
+
           </div>
 
+
           <div class="form-group">
-            <label for="private">Private Account</label>
+
+            <label for="private">
+              Private Account
+            </label>
+
             <select id="private">
-              <option value="0">No</option>
-              <option value="1">Yes</option>
+
+              <option value="0">
+                No
+              </option>
+
+              <option value="1">
+                Yes
+              </option>
+
             </select>
+
           </div>
 
-          <div class="form-group">
-            <label for="desc_len">Description Length</label>
-            <input type="number" id="desc_len" value="50" min="0" required />
-          </div>
 
           <div class="form-group">
-            <label for="posts">Total Posts</label>
-            <input type="number" id="posts" value="100" min="0" required />
+
+            <label for="desc_len">
+              Description Length
+            </label>
+
+            <input
+              type="number"
+              id="desc_len"
+              value="50"
+              min="0"
+              required
+            />
+
           </div>
 
-          <div class="form-group">
-            <label for="followers">Followers</label>
-            <input type="number" id="followers" value="500" min="0" required />
-          </div>
 
           <div class="form-group">
-            <label for="follows">Following</label>
-            <input type="number" id="follows" value="200" min="0" required />
+
+            <label for="posts">
+              Total Posts
+            </label>
+
+            <input
+              type="number"
+              id="posts"
+              value="100"
+              min="0"
+              required
+            />
+
           </div>
+
+
+          <div class="form-group">
+
+            <label for="followers">
+              Followers
+            </label>
+
+            <input
+              type="number"
+              id="followers"
+              value="500"
+              min="0"
+              required
+            />
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="follows">
+              Following
+            </label>
+
+            <input
+              type="number"
+              id="follows"
+              value="200"
+              min="0"
+              required
+            />
+
+          </div>
+
         </div>
 
       </div>
 
-      <button type="submit" class="submit-btn" id="submitBtn">Analyze Account</button>
+
+      <button
+        type="submit"
+        class="submit-btn"
+        id="submitBtn"
+      >
+        Analyze Account
+      </button>
+
     </form>
 
-    <div class="error-msg" id="errorMsg"></div>
 
-    <div class="result-card" id="resultCard">
-      <div style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Prediction Result</div>
-      <div class="prediction-badge" id="predictionBadge">--</div>
-      <div id="confidenceText" style="color: var(--text-muted);">Confidence Score: --</div>
+    <!-- ERROR -->
+
+    <div
+      class="error-msg"
+      id="errorMsg"
+    ></div>
+
+
+    <!-- RESULT -->
+
+    <div
+      class="result-card"
+      id="resultCard"
+    >
+
+      <div
+        style="
+          color: var(--text-muted);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-size: 0.85rem;
+        "
+      >
+        Prediction Result
+      </div>
+
+      <div
+        class="prediction-badge"
+        id="predictionBadge"
+      >
+        --
+      </div>
+
+      <div
+        id="confidenceText"
+        style="color: var(--text-muted);"
+      >
+        Confidence Score: --
+      </div>
+
     </div>
+
   </div>
 
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
   <script>
+
+    /*
+      IMPORTANT:
+      Because Flask serves the frontend and backend
+      from the same Render service, we use:
+
+          /predict
+
+      NOT:
+
+          http://127.0.0.1:5000/predict
+    */
+
     const API_URL = '/predict';
-    
-    // Auto Redirection Logic
+
+
+    /* =========================
+       INTRO COUNTDOWN
+    ========================= */
+
     let countdownVal = 5;
-    const countdownEl = document.getElementById('countdown');
-    
+
+    const countdownEl =
+      document.getElementById('countdown');
+
+
     const timer = setInterval(() => {
+
       countdownVal--;
-      if (countdownEl) countdownEl.textContent = countdownVal;
-      
-      if (countdownVal <= 0) {
-        clearInterval(timer);
-        showPredictScreen();
+
+      if (countdownEl) {
+        countdownEl.textContent = countdownVal;
       }
+
+
+      if (countdownVal <= 0) {
+
+        clearInterval(timer);
+
+        showPredictScreen();
+
+      }
+
     }, 1000);
 
+
     function showPredictScreen() {
+
       clearInterval(timer);
-      document.getElementById('introScreen').classList.add('hidden');
-      document.getElementById('predictScreen').classList.remove('hidden');
+
+      document
+        .getElementById('introScreen')
+        .classList
+        .add('hidden');
+
+
+      document
+        .getElementById('predictScreen')
+        .classList
+        .remove('hidden');
+
     }
 
-    // Backend Flask Request Logic
-    document.getElementById('analyzeForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
 
-      const submitBtn = document.getElementById('submitBtn');
-      const resultCard = document.getElementById('resultCard');
-      const errorMsg = document.getElementById('errorMsg');
-      const badge = document.getElementById('predictionBadge');
-      const confidenceText = document.getElementById('confidenceText');
+    /* =========================
+       FORM SUBMISSION
+    ========================= */
 
-      errorMsg.style.display = 'none';
-      resultCard.style.display = 'none';
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Analyzing...';
+    document
+      .getElementById('analyzeForm')
+      .addEventListener('submit', async (e) => {
 
-      // Build JSON payload matching your model features
-      const payload = {
-        "profile pic": parseInt(document.getElementById('profile_pic').value, 10),
-        "nums/length username": parseFloat(document.getElementById('nums_username').value),
-        "fullname words": parseInt(document.getElementById('fullname_words').value, 10),
-        "nums/length fullname": parseFloat(document.getElementById('nums_fullname').value),
-        "name==username": parseInt(document.getElementById('name_equals_username').value, 10),
-        "description length": parseInt(document.getElementById('desc_len').value, 10),
-        "external URL": parseInt(document.getElementById('external_url').value, 10),
-        "private": parseInt(document.getElementById('private').value, 10),
-        "#posts": parseInt(document.getElementById('posts').value, 10),
-        "#followers": parseInt(document.getElementById('followers').value, 10),
-        "#follows": parseInt(document.getElementById('follows').value, 10)
-      };
+        e.preventDefault();
 
-      try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
 
-        const data = await response.json();
+        const submitBtn =
+          document.getElementById('submitBtn');
 
-        if (!response.ok) {
-          throw new Error(data.error || 'Prediction request failed.');
+        const resultCard =
+          document.getElementById('resultCard');
+
+        const errorMsg =
+          document.getElementById('errorMsg');
+
+        const badge =
+          document.getElementById('predictionBadge');
+
+        const confidenceText =
+          document.getElementById('confidenceText');
+
+
+        /* Reset UI */
+
+        errorMsg.style.display = 'none';
+
+        errorMsg.textContent = '';
+
+        resultCard.style.display = 'none';
+
+        submitBtn.disabled = true;
+
+        submitBtn.textContent = 'Analyzing...';
+
+
+        /* =========================
+           BUILD JSON PAYLOAD
+        ========================= */
+
+        const payload = {
+
+          "profile pic":
+            parseInt(
+              document.getElementById('profile_pic').value,
+              10
+            ),
+
+          "nums/length username":
+            parseFloat(
+              document.getElementById('nums_username').value
+            ),
+
+          "fullname words":
+            parseInt(
+              document.getElementById('fullname_words').value,
+              10
+            ),
+
+          "nums/length fullname":
+            parseFloat(
+              document.getElementById('nums_fullname').value
+            ),
+
+          "name==username":
+            parseInt(
+              document.getElementById('name_equals_username').value,
+              10
+            ),
+
+          "description length":
+            parseInt(
+              document.getElementById('desc_len').value,
+              10
+            ),
+
+          "external URL":
+            parseInt(
+              document.getElementById('external_url').value,
+              10
+            ),
+
+          "private":
+            parseInt(
+              document.getElementById('private').value,
+              10
+            ),
+
+          "#posts":
+            parseInt(
+              document.getElementById('posts').value,
+              10
+            ),
+
+          "#followers":
+            parseInt(
+              document.getElementById('followers').value,
+              10
+            ),
+
+          "#follows":
+            parseInt(
+              document.getElementById('follows').value,
+              10
+            )
+
+        };
+
+
+        console.log(
+          "Sending payload:",
+          payload
+        );
+
+
+        /* =========================
+           SEND REQUEST
+        ========================= */
+
+        try {
+
+          const response = await fetch(
+            API_URL,
+            {
+              method: 'POST',
+
+              headers: {
+                'Content-Type': 'application/json'
+              },
+
+              body: JSON.stringify(payload)
+            }
+          );
+
+
+          /*
+            IMPORTANT DEBUGGING CHANGE
+
+            Instead of directly doing:
+
+                response.json()
+
+            we first read the response as text.
+
+            This prevents:
+
+                Unexpected end of JSON input
+          */
+
+          const responseText =
+            await response.text();
+
+
+          console.log(
+            "HTTP Status:",
+            response.status
+          );
+
+
+          console.log(
+            "Server Response:",
+            responseText
+          );
+
+
+          /* =========================
+             EMPTY RESPONSE CHECK
+          ========================= */
+
+          if (!responseText) {
+
+            throw new Error(
+              `Server returned an empty response. HTTP status: ${response.status}`
+            );
+
+          }
+
+
+          /* =========================
+             PARSE JSON
+          ========================= */
+
+          let data;
+
+          try {
+
+            data =
+              JSON.parse(responseText);
+
+          } catch (jsonError) {
+
+            console.error(
+              "JSON parsing error:",
+              jsonError
+            );
+
+            throw new Error(
+              `Server returned invalid JSON. HTTP ${response.status}. Response: ${responseText}`
+            );
+
+          }
+
+
+          console.log(
+            "Parsed data:",
+            data
+          );
+
+
+          /* =========================
+             BACKEND ERROR
+          ========================= */
+
+          if (!response.ok) {
+
+            throw new Error(
+              data.error ||
+              'Prediction request failed.'
+            );
+
+          }
+
+
+          /* =========================
+             CHECK PREDICTION
+          ========================= */
+
+          if (!data.prediction) {
+
+            throw new Error(
+              data.error ||
+              'Prediction was not returned by the server.'
+            );
+
+          }
+
+
+          /* =========================
+             DISPLAY RESULT
+          ========================= */
+
+          badge.textContent =
+            data.prediction;
+
+
+          badge.className =
+            `prediction-badge ${data.prediction.toLowerCase()}`;
+
+
+          if (
+            typeof data.confidence === 'number'
+          ) {
+
+            confidenceText.textContent =
+              `Confidence: ${(data.confidence * 100).toFixed(2)}%`;
+
+          } else {
+
+            confidenceText.textContent =
+              'Confidence: N/A';
+
+          }
+
+
+          resultCard.style.display =
+            'block';
+
         }
 
-        badge.textContent = data.prediction;
-        badge.className = `prediction-badge ${data.prediction.toLowerCase()}`;
-        confidenceText.textContent = `Confidence: ${(data.confidence * 100).toFixed(2)}%`;
-        resultCard.style.display = 'block';
 
-      } catch (err) {
-        errorMsg.textContent = err.message || 'Error connecting to backend server.';
-        errorMsg.style.display = 'block';
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Analyze Account';
-      }
-    });
+        /* =========================
+           ERROR HANDLING
+        ========================= */
+
+        catch (err) {
+
+          console.error(
+            "Prediction Error:",
+            err
+          );
+
+
+          errorMsg.textContent =
+            err.message ||
+            'Error connecting to backend server.';
+
+
+          errorMsg.style.display =
+            'block';
+
+        }
+
+
+        /* =========================
+           RESET BUTTON
+        ========================= */
+
+        finally {
+
+          submitBtn.disabled =
+            false;
+
+          submitBtn.textContent =
+            'Analyze Account';
+
+        }
+
+      });
+
   </script>
+
 </body>
 </html>
